@@ -1,21 +1,32 @@
 <template>
-  <section class="flex flex-col">
-    <form action="" @submit.prevent="fetchSong" class="flex gap-1">
-      <input
-        v-model.trim="text"
-        type="text"
-        class="border-2 border-green-300 outline-none"
-      />
-      <button class="bg-green-400 text-white px-2 rounded-sm">search</button>
-    </form>
-
+  <form action="" @submit.prevent="fetchSong" class="flex gap-1 justify-center">
+    <input
+      v-model.trim="text"
+      type="text"
+      class="border-2 border-green-300 outline-none md:w-80"
+    />
+    <button class="bg-green-400 text-white px-2 rounded-sm">search</button>
+  </form>
+  <section
+    class="px-7 mt-14 grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 gap-4"
+  >
     <div v-for="resp in apiResponse">
-      <!-- <div v-for="{ title, subtitle, images } in resp">
-        <li>{{ title }}</li>
-        <li>{{ subtitle }}</li>
-        <img :src="images.coverart" alt="" />
-      </div> -->
-      <li>{{ resp.track }}</li>
+      <section
+        v-for="{ title, subtitle, images, share } in resp"
+        class="flex gap-2 py-1 px-1 border-green-400 border-2"
+      >
+        <img
+          :src="images.coverarthq"
+          alt="cover art"
+          class="w-24 h-24 rounded-sm"
+        />
+        <div class="text-sm flex flex-col justify-center">
+          <p>{{ title }}</p>
+          <p>{{ subtitle }}</p>
+          <a :href="share.href">Shazam Link</a>
+        </div>
+      </section>
+      <!-- <li>{{ resp.track }}</li> -->
     </div>
   </section>
 </template>
